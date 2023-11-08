@@ -1,4 +1,3 @@
-require('dotenv').config()
 const express = require('express');
 const app = express();
 const http = require('http').Server(app);
@@ -51,6 +50,6 @@ async function connectToMongoDB() {
 
 connectToMongoDB();
 
-const server = http.listen(3001, () => {
+const server = http.listen(3000, () => {
     console.log('server is running on port', server.address().port);
 });
