@@ -1,0 +1,1 @@
+docker run -d --name tmaior-chat-app-container -p 80:80 lucadecastro/tmaior-chat-image:latest

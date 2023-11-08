@@ -1,0 +1,1 @@
+docker stop tmaior-chat-app-container || true
