@@ -20,7 +20,9 @@ jobs:
         run: docker tag lucadecastro/tmaior-chat-image:latest lucadecastro/tmaior-chat-image:v1
       -
         name: Push Docker Image to Docker Hub
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} && docker push lucadecastro/tmaior-chat-image:v1
+        run:  |
+          echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+          docker push lucadecastro/tmaior-chat-image:v1
       -
         name: Deploy to EC2
         run: |
