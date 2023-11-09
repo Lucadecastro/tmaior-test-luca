@@ -52,6 +52,6 @@ async function connectToMongoDB() {
 
 connectToMongoDB();
 
-const server = http.listen(3000, () => {
+const server = http.listen(3000, '0.0.0.0', () => {
     console.log('server is running on port', server.address().port);
 });
