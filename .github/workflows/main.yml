@@ -28,8 +28,11 @@ jobs:
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key.pem
           chmod 600 private_key.pem
-          ssh -i private_key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@"${{ secrets.EC2_HOST }}" <<EOF
-            docker stop tmaior-chat-app-container
+          ssh -i private_key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@"${{ secrets.EC2_HOST }}" <<\EOF
+            if [ \$(docker ps -aqf "name=tmaior-chat-app-container") ]; then
+              docker stop tmaior-chat-app-container
+              docker rm tmaior-chat-app-container
+            fi
             docker pull lucadecastro/tmaior-chat-image:latest
             docker run -d --name tmaior-chat-app-container -p 80:80 lucadecastro/tmaior-chat-image:v1
             EOF
