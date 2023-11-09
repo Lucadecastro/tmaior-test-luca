@@ -26,11 +26,13 @@ jobs:
       -
         name: Deploy to EC2
         run: |
-            ssh -i <(echo "$SSH_PRIVATE_KEY") -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@"${{ secrets.EC2_HOST }}" <<EOF
-              if [ \$(docker ps -aqf "name=tmaior-chat-app-container") ]; then
-                docker stop tmaior-chat-app-container
-                docker rm tmaior-chat-app-container
-              fi
-              docker pull lucadecastro/tmaior-chat-image:latest
-              docker run -d --name tmaior-chat-app-container -p 80:80 lucadecastro/tmaior-chat-image:v1
-              EOF
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > /tmp/private_key
+          chmod 600 /tmp/private_key
+          ssh -i /tmp/private_key -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@"${{ secrets.EC2_HOST }}" <<EOF
+            if [ \$(docker ps -aqf "name=tmaior-chat-app-container") ]; then
+              docker stop tmaior-chat-app-container
+              docker rm tmaior-chat-app-container
+            fi
+            docker pull lucadecastro/tmaior-chat-image:latest
+            docker run -d --name tmaior-chat-app-container -p 80:80 lucadecastro/tmaior-chat-image:v1
+EOF
