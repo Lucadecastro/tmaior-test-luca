@@ -26,8 +26,11 @@ jobs:
       -
         name: Deploy to EC2
         run: |
-          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} <<EOF
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key.pem
+          chmod 600 private_key.pem
+          ssh -i private_key.pem ${{ secrets.EC2_USERNAME }}@"${{ secrets.EC2_HOST }}" <<EOF
             docker stop tmaior-chat-app-container
             docker pull lucadecastro/tmaior-chat-image:latest
             docker run -d --name tmaior-chat-app-container -p 80:80 lucadecastro/tmaior-chat-image:v1
-          EOF
+            EOF
+          rm private_key.pem
