@@ -1,7 +1,8 @@
-#!/bin/bash
+# Stop the existing container
+docker stop tmaior-chat-app-container || true
 
-# Change permissions of the script
-chmod +x \$0
+# Remove the existing container
+docker rm tmaior-chat-app-container || true
 
-# Starts docker application
-docker run -d --name tmaior-chat-app-container -p 80:80 lucadecastro/tmaior-chat-image:latest
+# Start the new container
+docker run -d --name tmaior-chat-app-container -p 80:80 lucadecastro/tmaior-chat-image:v1
