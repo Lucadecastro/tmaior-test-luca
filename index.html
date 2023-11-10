@@ -25,7 +25,7 @@
     </div>
 </div>
 <script>
-   var socket = io();
+   var socket = io('http://50.19.14.89');
     $(() => {
         $("#send").click(()=>{
             sendMessage({name: $("#name").val(), message: $("#message").val()});
