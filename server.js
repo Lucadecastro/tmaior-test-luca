@@ -18,16 +18,6 @@ const Message = mongoose.model('Message',{
 const dbUrl =
   "mongodb+srv://luucadecastro:89ZUE5Up38Snx6fu@cluster0.ffkpj0f.mongodb.net/?retryWrites=true&w=majority";
 
-io.on('connection', () =>{
-  console.log('a user is connected')
-})
-
-async function connectToMongoDB() {
-    const connection = await mongoose.connect(dbUrl);
-    console.log('mongodb connected');
-    return connection;
-};
-
 app.get('/messages', (req, res) => {
   Message.find({},(err, messages)=> {
     res.send(messages);
@@ -49,6 +39,16 @@ app.post('/messages', (req, res) => {
     res.sendStatus(200);
   })
 })
+
+io.on('connection', () =>{
+  console.log('a user is connected')
+})
+
+async function connectToMongoDB() {
+    const connection = await mongoose.connect(dbUrl);
+    console.log('mongodb connected');
+    return connection;
+};
 
 connectToMongoDB();
 
