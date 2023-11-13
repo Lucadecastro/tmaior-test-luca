@@ -33,6 +33,6 @@ jobs:
               docker stop tmaior-chat-app-container
               docker rm tmaior-chat-app-container
             fi
-            docker pull lucadecastro/tmaior-chat-image:latest
+            docker pull lucadecastro/tmaior-chat-image:v1
             docker run -d --name tmaior-chat-app-container -p 80:80 lucadecastro/tmaior-chat-image:v1
           EOF
