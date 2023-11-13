@@ -5,8 +5,12 @@ const io = require('socket.io')(http);
 const mongoose = require('mongoose');
 const cors = require('cors');
 
+const corsOptions = {
+  origin: 'http://3.141.53.139',
+};
+
 app.use(express.static(__dirname));
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}))
 
