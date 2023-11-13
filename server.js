@@ -16,7 +16,7 @@ const Message = mongoose.model('Message',{
 })
 
 const dbUrl =
-  "mongodb+srv://luucadecastro:89ZUE5Up38Snx6fu@cluster0.ffkpj0f.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://luucadecastro:89ZUE5Up38Snx6fu@cluster0.ffkpj0f.mongodb.net/t-maior-chat-image";
 
 app.get('/messages', (req, res) => {
   Message.find({},(err, messages)=> {
