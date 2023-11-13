@@ -25,7 +25,7 @@
     </div>
 </div>
 <script>
-   var socket = io('http://3.141.53.139');
+   var socket = io();
     $(() => {
         $("#send").click(()=>{
             sendMessage({name: $("#name").val(), message: $("#message").val()});
@@ -41,13 +41,13 @@
     }
 
     function getMessages(){
-      $.get('http://3.141.53.139/messages', (data) => {
+      $.get('/messages', (data) => {
         data.forEach(addMessages);
       })
     }
 
     function sendMessage(message){
-      $.post('http://3.141.53.139/messages', message)
+      $.post('/messages', message)
     }
 </script>
 </body>
